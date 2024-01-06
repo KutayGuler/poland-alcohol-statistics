@@ -85,10 +85,10 @@
 
 <style>
   h1 {
-    @apply text-4xl font-bold;
+    @apply text-6xl;
   }
 
   h3 {
-    @apply text-2xl font-bold;
+    @apply text-4xl;
   }
 </style>

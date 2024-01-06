@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@800&family=Poppins&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Poppins&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -61,11 +61,11 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Abril Fatface', sans-serif;
 }
 
 .montserrat {
-  font-family: 'Montserrat', sans-serif;
+  font-family: 'Abril Fatface', sans-serif;
 }
 
 p {

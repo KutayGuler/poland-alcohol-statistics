@@ -1,5 +1,33 @@
-<main class="flex flex-col items-center justify-center">
-  <section class="flex flex-col gap-32 p-8 max-w-2xl bg-[#1f1b18] text-[#fbe7d1] z-10">
+<script lang="ts">
+  import { shuffle } from 'd3';
+  import PieChart from './PieChart.svelte';
+
+  let data = [
+    { index: 0, name: 'Xd', value: 5 },
+    { index: 1, name: 'lmao', value: 5 },
+    { index: 2, name: 'oo', value: 90 }
+  ];
+
+  let parent_array: any[] = [];
+
+  for (let i = 0; i < 100; i++) {
+    if (i < 58) {
+      parent_array.push('twa-angry-face');
+    } else if (i < 94) {
+      parent_array.push('twa-face-with-raised-eyebrow');
+    } else {
+      parent_array.push('twa-face-with-rolling-eyes');
+    }
+
+    parent_array = parent_array
+      .map((value) => ({ value, sort: Math.random() }))
+      .sort((a, b) => a.sort - b.sort)
+      .map(({ value }) => value);
+  }
+</script>
+
+<main class="flex flex-col items-center justify-center bg-[#1f1b18]">
+  <section class="flex flex-col gap-32 p-8 max-w-3xl bg-[#1f1b18] text-[#fbe7d1] z-10">
     <div>
       <h1 class="text-center">Alcohol in numbers</h1>
       <p>
@@ -53,11 +81,11 @@
         According to the total number of teenagers surveyed, the biggest influence on whether they
         drink alcohol is:
       </p>
-      <div class="flex flex-row gap-4 h-full items-end">
+      <div class="flex flex-row gap-8 h-full items-end">
         {#each [['PARENTS', 44, 100], ['FRIENDS', 42, 100], ['ADVERTISEMENT', 8, 49], ['SIBLINGS', 6, 46]] as [name, percentage, width]}
-          <div class="flex flex-col w-full items-center">
+          <div class="flex flex-col w-1/4 items-center">
             <div
-              class="flex justify-center relative w-full h-40 border-gray-300 border-4 rounded-b-full border-t-0"
+              class="flex justify-center relative w-full h-40 border-gray-300 border-4 rounded-b-full border-t-0 bg-gray-50/10"
             >
               <div
                 class="absolute bottom-0 w-1/4 bg-[#a0041e] h-24 border-gray-300 rounded-b-full -z-10"
@@ -66,7 +94,7 @@
             </div>
             <div class="bg-gray-300 h-40 w-1.5"></div>
             <div class="bg-gray-300 w-1/2 h-1"></div>
-            <div class="montserrat">
+            <div class="montserrat text-lg">
               {name} <br /> <span>({percentage}%)</span>
             </div>
           </div>
@@ -76,10 +104,36 @@
     <div>
       <h3>Parental attitudes and underage drinking</h3>
       <!-- TODO: chart -->
-      <p>Strongly against - 58%</p>
-      <p>Against, but with exceptions - 36%</p>
-      <p>Sometimes you can turn a blind eye - 6%</p>
+      <div class="flex flex-row items-start justify-center pt-4 gap-4">
+        <div class="bg-amber-500 w-96 h-[600px] border-gray-200 border-[16px] border-t-0 relative">
+          <div class="bg-white w-full h-20"></div>
+          {#each parent_array as _, i}
+            {@const row = (i % 10) * 32.5}
+            {@const column = Math.floor(i / 10) * 50}
+            <i
+              class="absolute text-2xl twa {_}"
+              style="left: {5 + Math.random() * 20 + row}px; bottom: {5 +
+                Math.random() * 20 +
+                column}px;"
+            ></i>
+          {/each}
+          <div
+            class="border-gray-200 w-72 h-80 border-l-0 border-[32px] rounded-full -z-10 absolute top-28 left-64 rounded-t-3xl"
+          ></div>
+        </div>
+        <div class="flex flex-col w-72 items-start justify-start">
+          <p><i class="twa twa-angry-face"></i> Strongly against <b>58%</b></p>
+          <p>
+            <i class="twa twa-face-with-raised-eyebrow"></i> Against but with exceptions <b>36%</b>
+          </p>
+          <p>
+            <i class="twa twa-face-with-rolling-eyes"></i> Sometimes you can turn a blind eye
+            <b>6%</b>
+          </p>
+        </div>
+      </div>
     </div>
+    <!-- <PieChart {data}></PieChart> -->
   </section>
 </main>
 

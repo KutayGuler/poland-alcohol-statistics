@@ -68,7 +68,8 @@ h6 {
   font-family: 'Abril Fatface', sans-serif;
 }
 
-p {
+p,
+span {
   font-family: 'Poppins', sans-serif;
 }
 
